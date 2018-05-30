@@ -25,14 +25,14 @@ public class ChessGUI extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 	private ChessGridGUI chessGridGUI; // le damier est une extension de
 										// JLayeredPane
-	
+
 	private ChessTextGUI execTrace; // affichage de la trace d'exécution dans un
 									// JPanel
 
 	public ChessGUI(ChessGameControlerModelVue chessGameControler) {
 		super();
 		Container contentPane = this.getContentPane();
-		this.chessGridGUI = new ChessGridGUI();
+		this.chessGridGUI = new ChessGridGUI(chessGameControler);
 
 		// /////////////////////////////////////////////////////
 		// panel d'affichage de la trace d'exécution à droite
@@ -105,7 +105,8 @@ public class ChessGUI extends JFrame implements Observer {
 				this.chessGridGUI, chessGameControler);
 
 		this.chessGridGUI.addMouseListener((MouseListener) mouseEventListener);
-		this.chessGridGUI.addMouseMotionListener((MouseMotionListener) mouseEventListener);
+		this.chessGridGUI
+				.addMouseMotionListener((MouseMotionListener) mouseEventListener);
 
 		// ///////////////////////////////////////////////////////////////////////////
 		// La vue indique au controleur à quel panel
