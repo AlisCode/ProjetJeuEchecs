@@ -2,6 +2,7 @@ package vue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import tools.data.Couleur;
 
@@ -16,6 +17,7 @@ public class ChessPieceGUI extends JLabel {
 		this.nom = nom;
 		this.colorPiece = couleur;
 		this.setIcon(imageIcon);
+		this.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
 	public Couleur getColorPiece() {

@@ -63,37 +63,33 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 										ChessPiecePos.values()[i].nom,
 										ChessPiecePos.values()[i].couleur)));
 
-				ChessPieceGUI cpg = (ChessPieceGUI)chessPieceGUI;
-				
+				ChessPieceGUI cpg = (ChessPieceGUI) chessPieceGUI;
+
 				// Ajout de l'image de piece sur le carre
 				index = ChessPiecePos.values()[i].coords[j].getY()
 						* BoardGameConfig.getNbLigne()
 						+ ChessPiecePos.values()[i].coords[j].getX();
 				square = (JPanel) this.getComponent(index);
 				square.add(chessPieceGUI);
-			
+
 			}
 		}
-		
+
 		// --------------
 
 	}
 
 	public void setChessBoard() {
-		
+
 		map = new HashMap<>();
-		
+
 		for (int x = 0; x < BoardGameConfig.getNbLigne(); x++) {
 			for (int y = 0; y < BoardGameConfig.getNbColonne(); y++) {
 				ChessSquareGUI square = new ChessSquareGUI(new Coord(x, y));
-				this.add(square,
-						JLayeredPane.DEFAULT_LAYER);
-				map.put(square.getCoords(),square);
-			    
+				this.add(square, JLayeredPane.DEFAULT_LAYER);
+				map.put(square.getCoords(), square);
 			}
 		}
-		
-		System.out.println(map);
 	}
 
 	@Override

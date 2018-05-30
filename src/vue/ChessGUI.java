@@ -105,8 +105,7 @@ public class ChessGUI extends JFrame implements Observer {
 				this.chessGridGUI, chessGameControler);
 
 		this.chessGridGUI.addMouseListener((MouseListener) mouseEventListener);
-		this.chessGridGUI
-				.addMouseMotionListener((MouseMotionListener) mouseEventListener);
+		this.chessGridGUI.addMouseMotionListener((MouseMotionListener) mouseEventListener);
 
 		// ///////////////////////////////////////////////////////////////////////////
 		// La vue indique au controleur à quel panel
