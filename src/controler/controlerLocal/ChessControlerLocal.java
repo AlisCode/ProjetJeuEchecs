@@ -12,7 +12,7 @@ public class ChessControlerLocal implements ChessGameControlerModelVue {
 	private ChessGameModel chessGame;
 
 	public ChessControlerLocal(ChessGameModel chessGame) {
-		// TODO Auto-generated constructor stub
+		this.chessGame = chessGame;
 	}
 
 	@Override

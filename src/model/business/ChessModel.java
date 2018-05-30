@@ -21,7 +21,6 @@ public class ChessModel implements ChessGameModel {
 
 	@Override
 	public Couleur getColorCurrentPlayer() {
-		// TODO Auto-generated method stub
 		return this.colorCurrentPlayer;
 	}
 

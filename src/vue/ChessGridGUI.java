@@ -1,5 +1,6 @@
 package vue;
 
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.swing.JPanel;
 import tools.BoardGameConfig;
 import tools.data.ChessPiecePos;
 import tools.data.Coord;
+import tools.data.Couleur;
 import tools.factory.ChessImageProvider;
 import controler.ChessGameControlerModel;
 
@@ -90,6 +92,48 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 				map.put(square.getCoords(), square);
 			}
 		}
+	}
+
+	/**
+	 * Récupère les coordonneés métiers en fonction de coordonnées X et Y
+	 * données en px
+	 * 
+	 * @param x
+	 *            en pixel, la coordonnée x à traduire
+	 * @param y
+	 *            en pixel, la coordonnée y à traduire
+	 * @return Un objet Coord métier qui correspond aux positions données
+	 */
+	public Coord getCoordsOfEvent(int x, int y) {
+		Component c = this.findComponentAt(x, y);
+
+		if (c instanceof ChessSquareGUI) {
+			return ((ChessSquareGUI) c).getCoords();
+		} else {
+			Component parent = c.getParent();
+			return ((ChessSquareGUI) parent).getCoords();
+		}
+	}
+
+	/**
+	 * Récupère la couleur d'une pièce située aux coordonnées données
+	 * 
+	 * @param coords
+	 *            Les coordonnées de la pièce qu'on recherche
+	 * @return La couleur de la pièce, ou null si aucune pièce n'a été trouvée
+	 */
+	public Couleur getCouleurAtCoords(Coord coords) {
+		ChessSquareGUI csg = map.get(coords);
+		
+		if(csg.getComponentCount() <= 0) { return null; }
+		
+		ChessPieceGUI cpg = (ChessPieceGUI) csg.getComponent(0);
+
+		if (cpg != null) {
+			return cpg.getColorPiece();
+		}
+
+		return null;
 	}
 
 	@Override

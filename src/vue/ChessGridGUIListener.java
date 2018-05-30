@@ -10,6 +10,8 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import tools.data.Coord;
+import tools.data.Couleur;
 import controler.ChessGameControlerModelVue;
 
 public class ChessGridGUIListener implements MouseListener, MouseMotionListener {
@@ -52,9 +54,15 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 
 	@Override
 	public void mousePressed(MouseEvent ev) {
-		// TODO Auto-generated method stub
 
 		this.chessPiece = null;
+
+		Coord coords = this.chessGridGUI.getCoordsOfEvent(ev.getX(), ev.getY());
+		Couleur col = this.chessGridGUI.getCouleurAtCoords(coords);
+		if (!this.chessGameControler.isPlayerOk(col)) {
+			return;
+		}
+
 		Component c = this.chessGridGUI.findComponentAt(ev.getX(), ev.getY());
 
 		if (c instanceof JPanel)
@@ -77,7 +85,12 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 			return;
 
 		this.chessPiece.setVisible(false);
+
 		Component c = this.chessGridGUI.findComponentAt(ev.getX(), ev.getY());
+		if (c == null) {
+			this.chessPiece.setVisible(true);
+			return;
+		}
 
 		if (c instanceof ChessPieceGUI) {
 			Container parent = c.getParent();
