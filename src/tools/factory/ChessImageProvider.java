@@ -36,7 +36,7 @@ public class ChessImageProvider {
 	/**
 	 * @param pieceType
 	 * @param pieceCouleur
-	 * @return nom fichier contenant image de la pi�ce
+	 * @return nom fichier contenant image de la pièce
 	 */
 	public static String getImageFile(String pieceType, Couleur pieceCouleur) {
 		String ret, key, value;

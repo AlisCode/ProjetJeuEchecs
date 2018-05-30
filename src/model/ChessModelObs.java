@@ -68,8 +68,8 @@ public class ChessModelObs extends Observable implements ChessGameModel {
 	 * 
 	 * @see model.business.BoardGamesModel#getPieceColor(int, int)
 	 * 
-	 * * Cette mÃ©thode ne pourra pas Ãªtre invoquÃ©e par d'autres client que la
-	 * classe BoardGame elle mÃªme
+	 * * Cette méthode ne pourra pas être invoquée par d'autres client que la
+	 * classe BoardGame elle même
 	 */
 	@Override
 	public Couleur getPieceColor(int x, int y) {

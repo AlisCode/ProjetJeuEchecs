@@ -38,12 +38,12 @@ public interface Pieces {
 	/**
 	 * @param xFinal
 	 * @param yFinal
-	 * @return true si d�placement effectu�
+	 * @return true si déplacement effectué
 	 */
 	public ActionType doMove(int xFinal, int yFinal);
 
 	/**
-	 * @return true si piece effectivement captur�e Positionne x et y à -1
+	 * @return true si piece effectivement capturée Positionne x et y à -1
 	 */
 	public boolean catchPiece();
 

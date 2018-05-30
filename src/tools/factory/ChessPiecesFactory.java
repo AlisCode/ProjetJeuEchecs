@@ -13,7 +13,7 @@ import model.piece.Pieces;
  * @author francoise.perrin Inspiration Jacques SARAYDARYAN, Adrien GUENARD
  * 
  *         Classe qui fabrique une liste de pieces de jeu d'echec de la couleur
- *         pass�e en param�tre
+ *         passée en paramètre
  *
  */
 public class ChessPiecesFactory {
@@ -27,7 +27,7 @@ public class ChessPiecesFactory {
 
 	/**
 	 * @param pieceCouleur
-	 * @return liste de pi�ces de jeu d'�chec
+	 * @return liste de pièces de jeu d'échec
 	 */
 	public static List<Pieces> newPieces(Couleur pieceCouleur) {
 

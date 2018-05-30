@@ -2,21 +2,24 @@ package model.business;
 
 import java.util.List;
 
-import javax.swing.colorchooser.ColorChooserComponentFactory;
-
+import model.piece.Pieces;
 import tools.BoardGameConfig;
 import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
+import tools.factory.ChessPiecesFactory;
 
 public class ChessModel implements ChessGameModel {
-	
+
 	private Couleur colorCurrentPlayer;
-	
+	private List<Pieces> piecesBlanches;
+	private List<Pieces> piecesNoires;
+
 	public ChessModel() {
 		super();
 		this.colorCurrentPlayer = BoardGameConfig.getBeginColor();
-;
+		this.piecesBlanches = ChessPiecesFactory.newPieces(Couleur.BLANC);
+		this.piecesNoires = ChessPiecesFactory.newPieces(Couleur.NOIR);
 	}
 
 	@Override
@@ -52,6 +55,12 @@ public class ChessModel implements ChessGameModel {
 	public boolean isEnd() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public String toString() {
+		return "[ " + "colorCurrentPlayer: " + this.colorCurrentPlayer + ","
+				+ "piecesBlanches: " + this.piecesBlanches + ','
+				+ "piecesNoires: " + this.piecesNoires + ']';
 	}
 
 }
