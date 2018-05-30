@@ -1,5 +1,6 @@
 package vue;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ public class ChessSquareGUI extends JPanel {
 				: Color.WHITE;
 
 		this.setBackground(this.color);
+		this.setLayout(new BorderLayout());
 	}
 
 }
