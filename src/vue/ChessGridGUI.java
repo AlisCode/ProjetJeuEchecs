@@ -1,7 +1,9 @@
 package vue;
 
 import java.awt.GridLayout;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -22,6 +24,7 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 	private static final long serialVersionUID = 1L;
 
 	private ChessGameControlerModel chessGameControlerModel;
+	private Map<Coord, ChessSquareGUI> map;
 
 	public ChessGridGUI(ChessGameControlerModel chessGameControlerModel) {
 		super();
@@ -80,13 +83,20 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 	}
 
 	public void setChessBoard() {
-
+		
+		map = new HashMap<>();
+		
 		for (int x = 0; x < BoardGameConfig.getNbLigne(); x++) {
 			for (int y = 0; y < BoardGameConfig.getNbColonne(); y++) {
-				this.add(new ChessSquareGUI(new Coord(x, y)),
+				ChessSquareGUI square = new ChessSquareGUI(new Coord(x, y));
+				this.add(square,
 						JLayeredPane.DEFAULT_LAYER);
+				map.put(square.getCoords(),square);
+			    
 			}
 		}
+		
+		System.out.println(map);
 	}
 
 	@Override

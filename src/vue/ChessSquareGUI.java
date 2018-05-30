@@ -21,4 +21,12 @@ public class ChessSquareGUI extends JPanel {
 		this.setLayout(new BorderLayout());
 	}
 
+	public Coord getCoords() {
+		return this.coords;
+	}
+	public String toString(){
+		return "[x: " + this.coords.getX() + ",y: " + this.coords.getY() +", color:" + this.color +"]";
+	}
+
+
 }
