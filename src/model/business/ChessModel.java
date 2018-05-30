@@ -2,16 +2,27 @@ package model.business;
 
 import java.util.List;
 
+import javax.swing.colorchooser.ColorChooserComponentFactory;
+
+import tools.BoardGameConfig;
 import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
 
 public class ChessModel implements ChessGameModel {
+	
+	private Couleur colorCurrentPlayer;
+	
+	public ChessModel() {
+		super();
+		this.colorCurrentPlayer = BoardGameConfig.getBeginColor();
+;
+	}
 
 	@Override
 	public Couleur getColorCurrentPlayer() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.colorCurrentPlayer;
 	}
 
 	@Override
