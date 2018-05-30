@@ -1,25 +1,24 @@
 package model.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import model.ChessImplementor;
 import model.piece.Pieces;
 import tools.BoardGameConfig;
 import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
-import tools.factory.ChessPiecesFactory;
 
 public class ChessModel implements ChessGameModel {
 
 	private Couleur colorCurrentPlayer;
-	private List<Pieces> piecesBlanches;
-	private List<Pieces> piecesNoires;
+	private ChessImplementor chessImplementor;
 
 	public ChessModel() {
 		super();
 		this.colorCurrentPlayer = BoardGameConfig.getBeginColor();
-		this.piecesBlanches = ChessPiecesFactory.newPieces(Couleur.BLANC);
-		this.piecesNoires = ChessPiecesFactory.newPieces(Couleur.NOIR);
+		this.chessImplementor = new ChessImplementor();
 	}
 
 	@Override
@@ -29,14 +28,25 @@ public class ChessModel implements ChessGameModel {
 
 	@Override
 	public Couleur getPieceColor(int x, int y) {
-		// TODO Auto-generated method stub
+		Pieces p = this.chessImplementor.getPieceAtCoord(x, y);
+		if (p != null) {
+			return p.getCouleur();
+		}
 		return null;
 	}
 
 	@Override
 	public List<Coord> getPieceListMoveOK(int xInit, int yInit) {
-		// TODO Auto-generated method stub
-		return null;
+		Pieces p = this.chessImplementor.getPieceAtCoord(xInit, yInit);
+		List<Coord> coords = new ArrayList();
+		for (int x = 0; x < BoardGameConfig.getNbColonne(); x++) {
+			for (int y = 0; y < BoardGameConfig.getNbLigne(); y++) {
+				if (p.isAlgoMoveOk(x, y)) {
+					coords.add(new Coord(x, y));
+				}
+			}
+		}
+		return coords;
 	}
 
 	@Override
@@ -59,8 +69,7 @@ public class ChessModel implements ChessGameModel {
 
 	public String toString() {
 		return "[ " + "colorCurrentPlayer: " + this.colorCurrentPlayer + ","
-				+ "piecesBlanches: " + this.piecesBlanches + ','
-				+ "piecesNoires: " + this.piecesNoires + ']';
+				+ "chessImplementor: " + this.chessImplementor + ']';
 	}
 
 }
