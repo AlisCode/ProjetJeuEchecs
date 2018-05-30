@@ -33,13 +33,15 @@ public class LauncherChessGame {
 		JFrame frame;
 		Dimension dim;
 
-		BoardGameConfig.newInstance(8, // nb lignes
-				8, // nb colonnes
-				"ChessPiecesFactory", // nom fabrique pièces
-				Couleur.BLANC, // couleur du joueur qui débute la partie
-				new Color(139, 69, 0), // couleur des cases noires
-				new Color(255, 250, 240), // couleur des cases blanches
-				750); // taille du damier
+		BoardGameConfig.newInstance(
+				8, 							// nb lignes
+				8, 							// nb colonnes
+				"ChessPiecesFactory", 		// nom fabrique pièces
+				Couleur.BLANC, 				// couleur du joueur qui débute la partie
+				new Color(139, 69, 0), 		// couleur des cases noires
+				new Color(255, 250, 240), 	// couleur des cases blanches
+				750); 						// taille du damier
+		
 		dim = new Dimension(1000, 800);
 
 		chessGame = new ChessModelObs();
