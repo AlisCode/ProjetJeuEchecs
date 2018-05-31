@@ -87,9 +87,10 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 
 		map = new HashMap<>();
 
-		for (int x = 0; x < BoardGameConfig.getNbLigne(); x++) {
-			for (int y = 0; y < BoardGameConfig.getNbColonne(); y++) {
-				ChessSquareGUI square = new ChessSquareGUI(new Coord(y, x));
+		for (int y = 0; y < BoardGameConfig.getNbColonne(); y++) {
+			for (int x = 0; x < BoardGameConfig.getNbLigne(); x++) {
+
+				ChessSquareGUI square = new ChessSquareGUI(new Coord(x, y));
 				this.add(square, JLayeredPane.DEFAULT_LAYER);
 				map.put(square.getCoords(), square);
 			}

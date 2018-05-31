@@ -95,6 +95,6 @@ public abstract class AbstractPiece implements Pieces {
 		int xDeplacement = deltaX / (deltaX == 0 ? 1 : Math.abs(deltaX));
 		int yDeplacement = deltaY / (deltaY == 0 ? 1 : Math.abs(deltaY));
 		return MathHelper.getCoordsBetween(new Coord(getX(), getY()),
-				new Coord(xFinal, yFinal), xDeplacement, yDeplacement);
+				new Coord(xFinal, yFinal), -xDeplacement, -yDeplacement);
 	}
 }

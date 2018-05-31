@@ -29,12 +29,11 @@ public class MathHelper {
 		int xTemp = depart.getX();
 		int yTemp = depart.getY();
 
-		while (xTemp != arrivee.getX() && yTemp != arrivee.getY()) {
-			coords.add(new Coord(xDeplacement, yDeplacement));
+		while (xTemp != arrivee.getX() || yTemp != arrivee.getY()) {
 			xTemp += xDeplacement;
 			yTemp += yDeplacement;
+			coords.add(new Coord(xTemp, yTemp));
 		}
-		System.out.println("List Coord :" + coords);
 		return coords;
 	}
 

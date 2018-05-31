@@ -22,9 +22,7 @@ public class Tour extends AbstractPiece {
 
 	@Override
 	public List<Coord> getMoveItinerary(int xFinal, int yFinal) {
-		// TODO Auto-generated method stub
 		return this.computeMoveItinerary(xFinal, yFinal);
-
 	}
 
 }
