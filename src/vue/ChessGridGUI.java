@@ -143,9 +143,13 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 	public void setPieceToMove(Coord coord) {
 
 		ChessSquareGUI csg = this.map.get(coord);
+
+		if (csg.getComponentCount() <= 0) {
+			return;
+		}
+
 		this.pieceToMove = csg != null ? (ChessPieceGUI) csg.getComponent(0)
 				: null;
-
 	}
 
 	@Override
@@ -161,11 +165,11 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 
 		if (c instanceof ChessPieceGUI) {
 			Container parent = c.getParent();
-			this.takenPiece = (ChessPieceGUI) c;
 			parent.removeAll();
 			parent.add(this.pieceToMove);
 		} else if (c instanceof ChessSquareGUI) {
 			Container parent = (Container) c;
+			parent.removeAll();
 			parent.add(this.pieceToMove);
 		}
 	}
