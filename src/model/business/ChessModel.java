@@ -71,9 +71,8 @@ public class ChessModel implements ChessGameModel {
 			
 			if(p1.doMove(xFinal, yFinal)==null)
 				System.out.println("Erreur Déplacement");
-			
-			p1.doMove(xFinal, yFinal);
-			System.out.println("Deplacement");
+			else
+				System.out.println("Deplacement");
 			return null;
 		}
 		return null;

@@ -15,6 +15,10 @@ public class Reine extends AbstractPiece {
 	@Override
 	public boolean isAlgoMoveOk(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
+		if((this.getX()-xFinal)==0 || (this.getY()-yFinal)==0 || (this.getX()-xFinal) == (this.getY()-yFinal)){
+			return true;
+		}
+		
 		return false;
 	}
 

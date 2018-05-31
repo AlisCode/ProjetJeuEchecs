@@ -15,6 +15,9 @@ public class Fou extends AbstractPiece {
 	@Override
 	public boolean isAlgoMoveOk(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
+		if((this.getX()-xFinal) == (this.getY()-yFinal)){
+			return true;
+		}
 		return false;
 	}
 
