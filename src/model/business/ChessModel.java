@@ -41,10 +41,11 @@ public class ChessModel implements ChessGameModel {
 		// garde une liste de toutes les coord de déplacement possibles pour une
 		// pièce
 		Pieces p = this.chessImplementor.getPieceAtCoord(xInit, yInit);
-		List<Coord> coords = new ArrayList();
+		List<Coord> coords = new ArrayList<>();
 		for (int x = 1; x <= BoardGameConfig.getNbColonne(); x++) {
 			for (int y = 1; y <= BoardGameConfig.getNbLigne(); y++) {
-				if (p.isAlgoMoveOk(x, y)) {
+				if (p.isAlgoMoveOk(x, y, ActionType.MOVE)
+						|| p.isAlgoMoveOk(x, y, ActionType.TAKE)) {
 					coords.add(new Coord(x, y));
 				}
 			}
@@ -61,7 +62,11 @@ public class ChessModel implements ChessGameModel {
 			return ActionType.UNKNOWN;
 		}
 
-		if (p1.isAlgoMoveOk(xFinal, yFinal)) {
+		if (p1.isAlgoMoveOk(
+				xFinal,
+				yFinal,
+				p2 != null && p2.getCouleur() != p1.getCouleur() ? ActionType.TAKE
+						: ActionType.MOVE)) {
 			// Deplacement si la piece ne va pas sur une piece de même couleur &
 			// deplacement possible
 

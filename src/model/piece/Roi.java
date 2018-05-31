@@ -2,7 +2,6 @@ package model.piece;
 
 import java.util.List;
 
-import tools.MathHelper;
 import tools.data.Coord;
 import tools.data.Couleur;
 

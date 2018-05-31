@@ -37,6 +37,8 @@ public class Pion extends AbstractPiece {
 			takeMoveLegality = Math.abs(deltaX) == 1
 					&& deltaY == deltaForwardOne;
 			break;
+		default:
+			break;
 		}
 
 		return verticalMoveLegality || takeMoveLegality;
@@ -45,7 +47,7 @@ public class Pion extends AbstractPiece {
 	@Override
 	public List<Coord> getMoveItinerary(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
-		System.out.println("getMoveItinerary "  );
+		System.out.println("getMoveItinerary ");
 		return this.computeMoveItinerary(xFinal, yFinal);
 	}
 

@@ -2,7 +2,6 @@ package model.piece;
 
 import java.util.List;
 
-import model.ChessImplementor;
 import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
@@ -54,6 +53,8 @@ public interface Pieces {
 	 * @param yFinal
 	 * @return true si déplacement légal en fonction des algo de déplacement
 	 *         spécifique de chaque pièce
+	 * 
+	 * @deprecated
 	 */
 	public boolean isAlgoMoveOk(int xFinal, int yFinal);
 
