@@ -28,12 +28,17 @@ public class MathHelper {
 
 		int xTemp = depart.getX();
 		int yTemp = depart.getY();
+		boolean firstLoop = true;
 
 		while (xTemp != arrivee.getX() || yTemp != arrivee.getY()) {
+			if (!firstLoop) {
+				coords.add(new Coord(xTemp, yTemp));
+			}
 			xTemp += xDeplacement;
 			yTemp += yDeplacement;
-			coords.add(new Coord(xTemp, yTemp));
+			firstLoop = false;
 		}
+
 		return coords;
 	}
 
