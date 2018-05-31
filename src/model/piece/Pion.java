@@ -7,14 +7,29 @@ import tools.data.Couleur;
 
 public class Pion extends AbstractPiece {
 
+	private boolean hasFirstMoved;
+
 	public Pion(Couleur couleur, Coord coords) {
 		super(couleur, coords);
-		// TODO Auto-generated constructor stub
+		this.hasFirstMoved = false;
 	}
 
 	@Override
 	public boolean isAlgoMoveOk(int xFinal, int yFinal) {
-		// TODO Auto-generated method stub
+
+		int deltaY = yFinal - this.getY();
+
+		switch (this.getCouleur()) {
+		case NOIR:
+			return xFinal == this.getX() && this.hasFirstMoved ? deltaY == 1
+					: (deltaY <= 2 && deltaY > 0);
+		case BLANC:
+			return xFinal == this.getX() && this.hasFirstMoved ? deltaY == -1
+					: (deltaY >= -2 && deltaY < 0);
+		default:
+			break;
+		}
+
 		return false;
 	}
 
