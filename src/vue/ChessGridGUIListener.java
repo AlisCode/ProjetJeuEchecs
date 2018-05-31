@@ -1,7 +1,6 @@
 package vue;
 
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

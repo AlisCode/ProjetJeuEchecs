@@ -22,17 +22,18 @@ public class Pion extends AbstractPiece {
 		int deltaX = this.getX() - xFinal;
 		int deltaY = this.getY() - yFinal;
 		boolean isMovingOnXAxis = Math.abs(deltaX) == 1;
+		int limitMove = this.hasFirstMoved ? 1 : 2;
 		switch (action) {
 		case MOVE:
 			if (this.getCouleur() == Couleur.NOIR) {
-				return !isMovingOnXAxis && deltaY < 0;
+				return !isMovingOnXAxis && deltaY < 0 && deltaY >= -limitMove;
 			}
-			return !isMovingOnXAxis && deltaY > 0;
+			return !isMovingOnXAxis && deltaY > 0 && deltaY <= limitMove;
 		case TAKE:
 			if (this.getCouleur() == Couleur.NOIR) {
-				return isMovingOnXAxis && deltaY < 0;
+				return isMovingOnXAxis && deltaY < 0 && deltaY >= -limitMove;
 			}
-			return isMovingOnXAxis && deltaY > 0;
+			return isMovingOnXAxis && deltaY > 0 && deltaY <= limitMove;
 		default:
 			return false;
 		}
@@ -48,4 +49,10 @@ public class Pion extends AbstractPiece {
 		return this.isAlgoMoveOk(xFinal, yFinal, ActionType.MOVE);
 	}
 
+	@Override
+	public ActionType doMove(int xFinal, int yFinal) {
+		ActionType at = super.doMove(xFinal, yFinal);
+		this.hasFirstMoved = true;
+		return at;
+	}
 }

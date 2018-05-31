@@ -92,7 +92,10 @@ public class ChessModel implements ChessGameModel {
 				}
 			}
 
-			return p1.doMove(xFinal, yFinal);
+			ActionType at = p1.doMove(xFinal, yFinal);
+			this.colorCurrentPlayer = this.colorCurrentPlayer == Couleur.BLANC ? Couleur.NOIR
+					: Couleur.BLANC;
+			return at;
 		}
 		return ActionType.ILLEGAL;
 	}
