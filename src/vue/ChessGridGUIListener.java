@@ -21,6 +21,8 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 	private ChessGameControlerModelVue chessGameControler;
 	private ChessGridGUI chessGridGUI;
 
+	private ChessSquareGUI squareDepart;
+
 	private int xOffset;
 	private int yOffset;
 
@@ -57,6 +59,7 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 	public void mousePressed(MouseEvent ev) {
 
 		this.chessPiece = null;
+		this.squareDepart = null;
 
 		Coord coords = this.chessGridGUI.getCoordsOfEvent(ev.getX(), ev.getY());
 		Couleur col = this.chessGridGUI.getCouleurAtCoords(coords);
@@ -74,6 +77,8 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 		this.yOffset = parentLocation.y - ev.getY();
 
 		this.chessPiece = (ChessPieceGUI) c;
+		this.squareDepart = (ChessSquareGUI) this.chessPiece.getParent();
+
 		chessPiece.setLocation(ev.getX() + xOffset, ev.getY() + yOffset);
 		chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
 		chessGridGUI.add(chessPiece, JLayeredPane.DRAG_LAYER);
@@ -93,6 +98,13 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 			return;
 		}
 
+		Coord coordsPiece = this.squareDepart.getCoords();
+		Coord coordsTarget = this.chessGridGUI.getCoordsOfEvent(ev.getX(),
+				ev.getY());
+
+		this.chessGameControler.actionsWhenPieceIsMovedOnGUI(coordsPiece,
+				coordsTarget);
+
 		if (c instanceof ChessPieceGUI) {
 			Container parent = c.getParent();
 			parent.removeAll();
@@ -103,7 +115,7 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 		}
 
 		this.chessPiece.setVisible(true);
-		
+
 	}
 
 	@Override

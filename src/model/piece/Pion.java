@@ -2,6 +2,8 @@ package model.piece;
 
 import java.util.List;
 
+import tools.MathHelper;
+import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
 
@@ -15,28 +17,39 @@ public class Pion extends AbstractPiece {
 	}
 
 	@Override
-	public boolean isAlgoMoveOk(int xFinal, int yFinal) {
+	public boolean isAlgoMoveOk(int xFinal, int yFinal, ActionType action) {
 
 		int deltaY = yFinal - this.getY();
+		int deltaX = xFinal - this.getX();
+		boolean verticalMoveLegality = false;
+		boolean takeMoveLegality = false;
 
-		switch (this.getCouleur()) {
-		case NOIR:
-			return xFinal == this.getX() && this.hasFirstMoved ? deltaY == 1
-					: (deltaY <= 2 && deltaY > 0);
-		case BLANC:
-			return xFinal == this.getX() && this.hasFirstMoved ? deltaY == -1
-					: (deltaY >= -2 && deltaY < 0);
-		default:
+		int deltaForwardOne = 1 * (this.getCouleur() == Couleur.NOIR ? 1 : -1);
+		int deltaForwardTwo = 2 * (this.getCouleur() == Couleur.BLANC ? 1 : -1);
+
+		switch (action) {
+		case MOVE:
+			verticalMoveLegality = xFinal == this.getX() && this.hasFirstMoved ? deltaY == deltaForwardOne
+					: MathHelper.isBetween(deltaForwardTwo, 0, deltaY);
+			break;
+		case TAKE:
+			takeMoveLegality = Math.abs(deltaX) == 1
+					&& deltaY == deltaForwardOne;
 			break;
 		}
 
-		return false;
+		return verticalMoveLegality || takeMoveLegality;
 	}
 
 	@Override
 	public List<Coord> getMoveItinerary(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isAlgoMoveOk(int xFinal, int yFinal) {
+		return this.isAlgoMoveOk(xFinal, yFinal, ActionType.MOVE);
 	}
 
 }

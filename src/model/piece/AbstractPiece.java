@@ -71,8 +71,11 @@ public abstract class AbstractPiece implements Pieces {
 	public abstract boolean isAlgoMoveOk(int xFinal, int yFinal);
 
 	@Override
+	/**
+	 * Dans le cas général, ActionType est ignoré. Dans le cas du pion, la fonction est ré-implémentée
+	 */
 	public boolean isAlgoMoveOk(int xFinal, int yFinal, ActionType type) {
-		return isAlgoMoveOk(xFinal, yFinal);
+		return this.isAlgoMoveOk(xFinal, yFinal);
 	}
 
 	@Override

@@ -65,8 +65,6 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 										ChessPiecePos.values()[i].nom,
 										ChessPiecePos.values()[i].couleur)));
 
-				ChessPieceGUI cpg = (ChessPieceGUI) chessPieceGUI;
-
 				// Ajout de l'image de piece sur le carre
 				index = ChessPiecePos.values()[i].coords[j].getY()
 						* BoardGameConfig.getNbLigne()
@@ -124,9 +122,11 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 	 */
 	public Couleur getCouleurAtCoords(Coord coords) {
 		ChessSquareGUI csg = map.get(coords);
-		
-		if(csg.getComponentCount() <= 0) { return null; }
-		
+
+		if (csg.getComponentCount() <= 0) {
+			return null;
+		}
+
 		ChessPieceGUI cpg = (ChessPieceGUI) csg.getComponent(0);
 
 		if (cpg != null) {

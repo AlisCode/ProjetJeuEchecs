@@ -26,6 +26,7 @@ public class ChessControlerLocal implements ChessGameControlerModelVue {
 	public void actionsWhenPieceIsMovedOnGUI(Coord pieceToMoveCoord,
 			Coord targetCoord) {
 		// TODO Auto-generated method stub
+		System.out.println("Called actionWhenPieceIsMovedOnGUI");
 
 	}
 
