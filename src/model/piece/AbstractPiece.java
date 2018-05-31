@@ -2,6 +2,7 @@ package model.piece;
 
 import java.util.List;
 
+import tools.MathHelper;
 import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
@@ -86,5 +87,14 @@ public abstract class AbstractPiece implements Pieces {
 		this.coords = coords;
 		this.lastCoords = null;
 		this.name = this.getClass().getSimpleName();
+	}
+
+	public List<Coord> computeMoveItinerary(int xFinal, int yFinal) {
+		int deltaX = this.getX() - xFinal;
+		int deltaY = this.getY() - yFinal;
+		int xDeplacement = deltaX / (deltaX == 0 ? 1 : Math.abs(deltaX));
+		int yDeplacement = deltaY / (deltaY == 0 ? 1 : Math.abs(deltaY));
+		return MathHelper.getCoordsBetween(new Coord(getX(), getY()),
+				new Coord(xFinal, yFinal), xDeplacement, yDeplacement);
 	}
 }

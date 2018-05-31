@@ -23,7 +23,7 @@ public class Reine extends AbstractPiece {
 	@Override
 	public List<Coord> getMoveItinerary(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.computeMoveItinerary(xFinal, yFinal);
 	}
 
 }

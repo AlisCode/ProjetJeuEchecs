@@ -45,7 +45,8 @@ public class Pion extends AbstractPiece {
 	@Override
 	public List<Coord> getMoveItinerary(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println("getMoveItinerary "  );
+		return this.computeMoveItinerary(xFinal, yFinal);
 	}
 
 	@Override
