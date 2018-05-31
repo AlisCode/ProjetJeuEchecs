@@ -15,7 +15,16 @@ public class Roi extends AbstractPiece {
 	@Override
 	public boolean isAlgoMoveOk(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		int deltaX = this.getX() - xFinal;
+		int deltaY = this.getY() - yFinal;
+		
+		int delta = Math.abs(deltaX) +Math.abs(deltaY);
+		
+		return ((deltaX == 0 ^ deltaY == 0 && (delta==1) )
+				|| (Math.abs(deltaX) == Math.abs(deltaY) && delta==2));
+		
+		
 	}
 
 	@Override

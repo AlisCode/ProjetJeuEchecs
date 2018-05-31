@@ -64,14 +64,19 @@ public class ChessModel implements ChessGameModel {
 			// Deplacement si la piece ne va pas sur une piece de même couleur &
 			// deplacement possible
 
-			if (p2 != null && p1.getCouleur() != p2.getCouleur()) {
-				// suppression piece
-				p2.catchPiece();
-				p1.doMove(xFinal, yFinal);
-				System.out.println("Suppression piece" + p2.getName() + " "
-						+ p2.getCouleur() + "Par : " + p1.getName() + " "
-						+ p1.getCouleur());
-				return ActionType.TAKE;
+			if (p2 != null) {
+
+				if (p1.getCouleur() != p2.getCouleur()) {
+					// suppression piece
+					p2.catchPiece();
+					p1.doMove(xFinal, yFinal);
+					System.out.println("Suppression piece" + p2.getName() + " "
+							+ p2.getCouleur() + "Par : " + p1.getName() + " "
+							+ p1.getCouleur());
+					return ActionType.TAKE;
+				} else {
+					return ActionType.ILLEGAL;
+				}
 			}
 
 			return p1.doMove(xFinal, yFinal);
