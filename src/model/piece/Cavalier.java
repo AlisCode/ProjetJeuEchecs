@@ -14,8 +14,10 @@ public class Cavalier extends AbstractPiece {
 
 	@Override
 	public boolean isAlgoMoveOk(int xFinal, int yFinal) {
-		// TODO Auto-generated method stub
-		return false;
+		int deltaX = this.getX() - xFinal;
+		int deltaY = this.getY() - yFinal;
+		int hamiltonianDistance = Math.abs(deltaX) + Math.abs(deltaY);
+		return hamiltonianDistance == 3 && deltaX != 0 && deltaY != 0;
 	}
 
 	@Override

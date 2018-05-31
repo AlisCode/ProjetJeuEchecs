@@ -2,6 +2,7 @@ package model.piece;
 
 import java.util.List;
 
+import tools.BoardGameConfig;
 import tools.data.Coord;
 import tools.data.Couleur;
 
@@ -14,11 +15,9 @@ public class Tour extends AbstractPiece {
 
 	@Override
 	public boolean isAlgoMoveOk(int xFinal, int yFinal) {
-		// TODO Auto-generated method stub
-		if((this.getX()-xFinal)==0 || (this.getY()-yFinal)==0){
-			return true;
-		}
-		return false;
+		int deltaX = this.getX() - xFinal;
+		int deltaY = this.getY() - yFinal;
+		return deltaX == 0 ^ deltaY == 0;
 	}
 
 	@Override

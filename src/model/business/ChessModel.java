@@ -57,7 +57,7 @@ public class ChessModel implements ChessGameModel {
 		Pieces p2 = this.chessImplementor.getPieceAtCoord(xFinal, yFinal);
 
 		if (p1 == null) {
-			return null;
+			return ActionType.UNKNOWN;
 		}
 
 		if (p1.isAlgoMoveOk(xFinal, yFinal)) {
@@ -67,20 +67,16 @@ public class ChessModel implements ChessGameModel {
 			if (p2 != null && p1.getCouleur() != p2.getCouleur()) {
 				// suppression piece
 				p2.catchPiece();
+				p1.doMove(xFinal, yFinal);
 				System.out.println("Suppression piece" + p2.getName() + " "
 						+ p2.getCouleur() + "Par : " + p1.getName() + " "
 						+ p1.getCouleur());
+				return ActionType.TAKE;
 			}
 
-			if (p1.doMove(xFinal, yFinal) == null)
-				System.out.println("Erreur Déplacement");
-			else {
-				System.out.println("Deplacement");
-			}
-
-			return null;
+			return p1.doMove(xFinal, yFinal);
 		}
-		return null;
+		return ActionType.ILLEGAL;
 	}
 
 	@Override
