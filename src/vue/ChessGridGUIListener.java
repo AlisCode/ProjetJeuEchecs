@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import tools.data.Coord;
 import tools.data.Couleur;
@@ -102,6 +103,7 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 		}
 
 		this.chessPiece.setVisible(true);
+		
 	}
 
 	@Override

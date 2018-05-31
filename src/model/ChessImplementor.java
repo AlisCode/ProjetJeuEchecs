@@ -23,7 +23,7 @@ public class ChessImplementor implements ChessGameImplementor {
 				+ ", piecesNoires: " + piecesNoires + "]";
 	}
 
-	public Pieces getPieceAtCoord(int x, int y) {
+	public Pieces getPieceAtCoord(int x, int y) { //Renvoie la piece en fonction des coords
 		for (Pieces p : this.piecesBlanches) {
 			if (p.getX() == x && p.getY() == y) {
 				return p;
