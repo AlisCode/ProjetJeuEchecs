@@ -9,7 +9,6 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import tools.data.Coord;
 import tools.data.Couleur;
@@ -62,7 +61,10 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 		this.squareDepart = null;
 
 		Coord coords = this.chessGridGUI.getCoordsOfEvent(ev.getX(), ev.getY());
+		this.chessGridGUI.setPieceToMove(coords);
+
 		Couleur col = this.chessGridGUI.getCouleurAtCoords(coords);
+
 		if (!this.chessGameControler.isPlayerOk(col)) {
 			return;
 		}
@@ -82,6 +84,7 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 		chessPiece.setLocation(ev.getX() + xOffset, ev.getY() + yOffset);
 		chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
 		chessGridGUI.add(chessPiece, JLayeredPane.DRAG_LAYER);
+
 	}
 
 	@Override
@@ -91,31 +94,13 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 			return;
 
 		this.chessPiece.setVisible(false);
-
-		Component c = this.chessGridGUI.findComponentAt(ev.getX(), ev.getY());
-		if (c == null) {
-			this.chessPiece.setVisible(true);
-			return;
-		}
-
 		Coord coordsPiece = this.squareDepart.getCoords();
 		Coord coordsTarget = this.chessGridGUI.getCoordsOfEvent(ev.getX(),
 				ev.getY());
+		this.chessPiece.setVisible(true);
 
 		this.chessGameControler.actionsWhenPieceIsMovedOnGUI(coordsPiece,
 				coordsTarget);
-
-		if (c instanceof ChessPieceGUI) {
-			Container parent = c.getParent();
-			parent.removeAll();
-			parent.add(this.chessPiece);
-		} else {
-			Container parent = (Container) c;
-			parent.add(this.chessPiece);
-		}
-
-		this.chessPiece.setVisible(true);
-
 	}
 
 	@Override

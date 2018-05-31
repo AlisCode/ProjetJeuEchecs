@@ -6,11 +6,13 @@ import model.business.ChessGameModel;
 import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
+import vue.ChessGridGUI;
 import controler.ChessGameControlerModelVue;
 
 public class ChessControlerLocal implements ChessGameControlerModelVue {
 
 	private ChessGameModel chessGame;
+	private ChessGridGUI chessGridGUI;
 
 	public ChessControlerLocal(ChessGameModel chessGame) {
 		this.chessGame = chessGame;
@@ -27,17 +29,21 @@ public class ChessControlerLocal implements ChessGameControlerModelVue {
 	public void actionsWhenPieceIsMovedOnGUI(Coord pieceToMoveCoord,
 			Coord targetCoord) {
 		// TODO Auto-generated method stub
-		System.out.println("Called actionWhenPieceIsMovedOnGUI");
 
 		ActionType at = this.chessGame
 				.move(pieceToMoveCoord.getX(), pieceToMoveCoord.getY(),
 						targetCoord.getX(), targetCoord.getY());
+
+		if (at != ActionType.ILLEGAL) {
+			this.chessGridGUI.movePiece(targetCoord);
+		} else {
+			this.chessGridGUI.undoMovePiece(pieceToMoveCoord);
+		}
 	}
 
 	@Override
 	public void setGridPanel(JLayeredPane panel) {
-		// TODO Auto-generated method stub
-
+		this.chessGridGUI = (ChessGridGUI) panel;
 	}
 
 	@Override

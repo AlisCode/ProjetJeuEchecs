@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,10 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 	private static final long serialVersionUID = 1L;
 
 	private ChessGameControlerModel chessGameControlerModel;
+	private ChessPieceGUI pieceToMove;
 	private Map<Coord, ChessSquareGUI> map;
+
+	private ChessPieceGUI takenPiece;
 
 	public ChessGridGUI(ChessGameControlerModel chessGameControlerModel) {
 		super();
@@ -128,7 +132,6 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 		}
 
 		ChessPieceGUI cpg = (ChessPieceGUI) csg.getComponent(0);
-
 		if (cpg != null) {
 			return cpg.getColorPiece();
 		}
@@ -138,7 +141,10 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 
 	@Override
 	public void setPieceToMove(Coord coord) {
-		// TODO Auto-generated method stub
+
+		ChessSquareGUI csg = this.map.get(coord);
+		this.pieceToMove = csg != null ? (ChessPieceGUI) csg.getComponent(0)
+				: null;
 
 	}
 
@@ -150,13 +156,25 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 
 	@Override
 	public void movePiece(Coord targetCoord) {
-		// TODO Auto-generated method stub
 
+		Component c = map.get(targetCoord);
+
+		if (c instanceof ChessPieceGUI) {
+			Container parent = c.getParent();
+			this.takenPiece = (ChessPieceGUI) c;
+			parent.removeAll();
+			parent.add(this.pieceToMove);
+		} else if (c instanceof ChessSquareGUI) {
+			Container parent = (Container) c;
+			parent.add(this.pieceToMove);
+		}
 	}
 
 	@Override
 	public void undoMovePiece(Coord pieceToMoveInitCoord) {
-		// TODO Auto-generated method stub
+
+		ChessSquareGUI targetSquare = map.get(pieceToMoveInitCoord);
+		targetSquare.add(this.pieceToMove);
 
 	}
 
