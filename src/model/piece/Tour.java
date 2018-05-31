@@ -15,6 +15,9 @@ public class Tour extends AbstractPiece {
 	@Override
 	public boolean isAlgoMoveOk(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
+		if((this.getX()-xFinal)==0 || (this.getY()-yFinal)==0){
+			return true;
+		}
 		return false;
 	}
 

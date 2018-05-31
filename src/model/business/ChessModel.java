@@ -77,7 +77,7 @@ public class ChessModel implements ChessGameModel {
 			else {
 				System.out.println("Deplacement");
 			}
-			
+
 			return null;
 		}
 		return null;
