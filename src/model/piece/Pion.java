@@ -19,33 +19,46 @@ public class Pion extends AbstractPiece {
 	@Override
 	public boolean isAlgoMoveOk(int xFinal, int yFinal, ActionType action) {
 
-		int deltaY = yFinal - this.getY();
-		int deltaX = xFinal - this.getX();
-		boolean verticalMoveLegality = false;
-		boolean takeMoveLegality = false;
-
-		int coeffDelta = (this.getCouleur() == Couleur.NOIR ? 1 : -1);
-		int deltaForwardOne = 1 * coeffDelta;
-		int deltaForwardTwo = 2 * coeffDelta;
-
+		int deltaX = this.getX() - xFinal;
+		int deltaY = this.getY() - yFinal;
+		boolean isMovingOnXAxis = Math.abs(deltaX) == 1;
 		switch (action) {
 		case MOVE:
-			verticalMoveLegality = xFinal == this.getX() && this.hasFirstMoved ? deltaY == deltaForwardOne
-					: MathHelper.isBetween(deltaForwardTwo, 0, deltaY);
-			break;
+			if (this.getCouleur() == Couleur.NOIR) {
+				return !isMovingOnXAxis && deltaY < 0;
+			}
+			return !isMovingOnXAxis && deltaY > 0;
 		case TAKE:
-			takeMoveLegality = Math.abs(deltaX) == 1
-					&& deltaY == deltaForwardOne;
-			break;
+			if (this.getCouleur() == Couleur.NOIR) {
+				return isMovingOnXAxis && deltaY < 0;
+			}
+			return isMovingOnXAxis && deltaY > 0;
+		default:
+			return false;
 		}
 
-		return verticalMoveLegality || takeMoveLegality;
+		/*
+		 * boolean verticalMoveLegality = false; boolean takeMoveLegality =
+		 * false;
+		 * 
+		 * int coeffDelta = (this.getCouleur() == Couleur.NOIR ? 1 : -1); int
+		 * deltaForwardOne = 1 * coeffDelta; int deltaForwardTwo = 2 *
+		 * coeffDelta;
+		 * 
+		 * switch (action) { case MOVE: verticalMoveLegality = xFinal ==
+		 * this.getX() && this.hasFirstMoved ? deltaY == deltaForwardOne :
+		 * MathHelper.isBetween(deltaForwardTwo, 0, deltaY); break; case TAKE:
+		 * takeMoveLegality = Math.abs(deltaX) == 1 && deltaY ==
+		 * deltaForwardOne; break; }
+		 * 
+		 * return verticalMoveLegality || takeMoveLegality;
+		 */
 	}
 
 	@Override
 	public List<Coord> getMoveItinerary(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
-		System.out.println("getMoveItinerary "  );
+		System.out.println("getMoveItinerary ");
 		return this.computeMoveItinerary(xFinal, yFinal);
 	}
 
