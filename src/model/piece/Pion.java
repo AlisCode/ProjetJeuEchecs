@@ -24,8 +24,9 @@ public class Pion extends AbstractPiece {
 		boolean verticalMoveLegality = false;
 		boolean takeMoveLegality = false;
 
-		int deltaForwardOne = 1 * (this.getCouleur() == Couleur.NOIR ? 1 : -1);
-		int deltaForwardTwo = 2 * (this.getCouleur() == Couleur.BLANC ? 1 : -1);
+		int coeffDelta = (this.getCouleur() == Couleur.NOIR ? 1 : -1);
+		int deltaForwardOne = 1 * coeffDelta;
+		int deltaForwardTwo = 2 * coeffDelta;
 
 		switch (action) {
 		case MOVE:

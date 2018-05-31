@@ -37,7 +37,8 @@ public class ChessModel implements ChessGameModel {
 
 	@Override
 	public List<Coord> getPieceListMoveOK(int xInit, int yInit) {
-		// garde une liste de toutes les coord de déplacement possibles pour une pièce   
+		// garde une liste de toutes les coord de déplacement possibles pour une
+		// pièce
 		Pieces p = this.chessImplementor.getPieceAtCoord(xInit, yInit);
 		List<Coord> coords = new ArrayList();
 		for (int x = 0; x < BoardGameConfig.getNbColonne(); x++) {
@@ -52,19 +53,31 @@ public class ChessModel implements ChessGameModel {
 
 	@Override
 	public ActionType move(int xInit, int yInit, int xFinal, int yFinal) {
-		// TODO Auto-generated method stub
 		Pieces p1 = this.chessImplementor.getPieceAtCoord(xInit, yInit);
 		Pieces p2 = this.chessImplementor.getPieceAtCoord(xFinal, yFinal);
-		
-		if(p1.isAlgoMoveOk(xFinal, yFinal) && p2.getCouleur()== p2.getCouleur()){
-			//Deplacement si la piece ne va pas sur une piece de même couleur & deplacement possible
-			System.out.println("Deplacement");
-			if(p2 != null){
-				//suppression piece
-				System.out.println("Suppression piece");
-				return null;
+
+		if (p1 == null) {
+			return null;
+		}
+
+		if (p1.isAlgoMoveOk(xFinal, yFinal)) {
+			// Deplacement si la piece ne va pas sur une piece de même couleur &
+			// deplacement possible
+
+			if (p2 != null && p1.getCouleur() != p2.getCouleur()) {
+				// suppression piece
+				p2.catchPiece();
+				System.out.println("Suppression piece" + p2.getName() + " "
+						+ p2.getCouleur() + "Par : " + p1.getName() + " "
+						+ p1.getCouleur());
 			}
-			System.out.println("non suppression");
+
+			if (p1.doMove(xFinal, yFinal) == null)
+				System.out.println("Erreur Déplacement");
+			else {
+				System.out.println("Deplacement");
+			}
+			
 			return null;
 		}
 		return null;

@@ -3,6 +3,7 @@ package controler.controlerLocal;
 import javax.swing.JLayeredPane;
 
 import model.business.ChessGameModel;
+import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
 import controler.ChessGameControlerModelVue;
@@ -28,6 +29,9 @@ public class ChessControlerLocal implements ChessGameControlerModelVue {
 		// TODO Auto-generated method stub
 		System.out.println("Called actionWhenPieceIsMovedOnGUI");
 
+		ActionType at = this.chessGame
+				.move(pieceToMoveCoord.getX(), pieceToMoveCoord.getY(),
+						targetCoord.getX(), targetCoord.getY());
 	}
 
 	@Override

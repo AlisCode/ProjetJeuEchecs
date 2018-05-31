@@ -3,7 +3,6 @@ package model;
 import java.util.List;
 
 import model.piece.Pieces;
-import tools.data.Coord;
 import tools.data.Couleur;
 import tools.factory.ChessPiecesFactory;
 
@@ -23,7 +22,8 @@ public class ChessImplementor implements ChessGameImplementor {
 				+ ", piecesNoires: " + piecesNoires + "]";
 	}
 
-	public Pieces getPieceAtCoord(int x, int y) { //Renvoie la piece en fonction des coords
+	public Pieces getPieceAtCoord(int x, int y) { // Renvoie la piece en
+													// fonction des coords
 		for (Pieces p : this.piecesBlanches) {
 			if (p.getX() == x && p.getY() == y) {
 				return p;
