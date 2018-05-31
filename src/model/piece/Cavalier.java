@@ -1,5 +1,6 @@
 package model.piece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tools.data.Coord;
@@ -23,7 +24,9 @@ public class Cavalier extends AbstractPiece {
 	@Override
 	public List<Coord> getMoveItinerary(int xFinal, int yFinal) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Coord> coords = new ArrayList<Coord>();
+		coords.add(new Coord(xFinal, yFinal));
+		return coords ;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import model.ChessImplementor;
 import model.piece.Pieces;
 import tools.BoardGameConfig;
+import tools.MathHelper;
 import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
@@ -59,10 +60,25 @@ public class ChessModel implements ChessGameModel {
 		if (p1 == null) {
 			return ActionType.UNKNOWN;
 		}
+		/*
+		 * MathHelper mathHelper; Coord list = mathHelper.getCoordsBetween(new
+		 * Coord(xInit, yFinal), new Coord(xFinal, yFinal), xDeplacement,
+		 * yDeplacement) for(i=0;i<list.);i++ ){}
+		 */
 
 		if (p1.isAlgoMoveOk(xFinal, yFinal)) {
 			// Deplacement si la piece ne va pas sur une piece de même couleur &
 			// deplacement possible
+
+			// vérifie si on a une pièce sur le chemin. Si oui, le move est
+			// illégal.
+			List<Coord> list = p1.getMoveItinerary(xFinal, yFinal);
+
+			for (Coord c : list) {
+				if (this.chessImplementor.getPieceAtCoord(c.getX(), c.getY()) != null) {
+					return ActionType.ILLEGAL;
+				}
+			}
 
 			if (p2 != null) {
 
