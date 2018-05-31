@@ -21,11 +21,11 @@ public class Pion extends AbstractPiece {
 
 		switch (this.getCouleur()) {
 		case NOIR:
-			return xFinal == this.getX() && this.hasFirstMoved ? deltaY == 1
-					: (deltaY <= 2 && deltaY > 0);
-		case BLANC:
 			return xFinal == this.getX() && this.hasFirstMoved ? deltaY == -1
-					: (deltaY >= -2 && deltaY < 0);
+					: (deltaY >= -2 && deltaY > 0);
+		case BLANC:
+			return xFinal == this.getX() && this.hasFirstMoved ? deltaY == 1
+					: (deltaY <= 2 && deltaY < 0);
 		default:
 			break;
 		}

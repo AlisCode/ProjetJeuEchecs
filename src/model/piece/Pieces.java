@@ -2,6 +2,7 @@ package model.piece;
 
 import java.util.List;
 
+import model.ChessImplementor;
 import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
@@ -45,6 +46,7 @@ public interface Pieces {
 	/**
 	 * @return true si piece effectivement capturée Positionne x et y à -1
 	 */
+
 	public boolean catchPiece();
 
 	/**

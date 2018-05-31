@@ -56,15 +56,24 @@ public class ChessModel implements ChessGameModel {
 		Pieces p1 = this.chessImplementor.getPieceAtCoord(xInit, yInit);
 		Pieces p2 = this.chessImplementor.getPieceAtCoord(xFinal, yFinal);
 		
-		if(p1.isAlgoMoveOk(xFinal, yFinal) && p2.getCouleur()== p2.getCouleur()){
+		if(p1 == null){
+			return null;
+		}
+				
+		if(p1.isAlgoMoveOk(xFinal, yFinal)){
 			//Deplacement si la piece ne va pas sur une piece de même couleur & deplacement possible
-			System.out.println("Deplacement");
-			if(p2 != null){
+			
+			if(p2 != null && p1.getCouleur() != p2.getCouleur()){
 				//suppression piece
-				System.out.println("Suppression piece");
-				return null;
+				p2.catchPiece();
+				System.out.println("Suppression piece" + p2.getName() + " " + p2.getCouleur() + "Par : " + p1.getName() + " " + p1.getCouleur() );
 			}
-			System.out.println("non suppression");
+			
+			if(p1.doMove(xFinal, yFinal)==null)
+				System.out.println("Erreur Déplacement");
+			
+			p1.doMove(xFinal, yFinal);
+			System.out.println("Deplacement");
 			return null;
 		}
 		return null;
