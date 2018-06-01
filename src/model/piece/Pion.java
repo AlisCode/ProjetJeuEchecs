@@ -22,7 +22,6 @@ public class Pion extends AbstractPiece {
 
 		int deltaX = this.getX() - xFinal;
 		int deltaY = this.getY() - yFinal;
-		boolean isMovingOnXAxis = Math.abs(deltaX) == 1;
 		int limitMove = this.hasFirstMoved ? 1 : 2;
 		int coeffMove = this.getCouleur() == Couleur.NOIR ? -1 : 1;
 		switch (action) {
