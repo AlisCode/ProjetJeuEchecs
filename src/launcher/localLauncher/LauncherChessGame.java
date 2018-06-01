@@ -45,8 +45,6 @@ public class LauncherChessGame {
 
 		chessGame = new ChessModelObs();
 		chessGameControler = new ChessControlerLocal(chessGame);
-		
-		System.out.println(chessGame);
 
 		frame = new ChessGUI(chessGameControler);
 		((Observable) chessGame).addObserver((Observer) frame);

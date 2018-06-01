@@ -42,15 +42,36 @@ public class ChessModel implements ChessGameModel {
 		// pièce
 		Pieces p = this.chessImplementor.getPieceAtCoord(xInit, yInit);
 		List<Coord> coords = new ArrayList<>();
-		for (int x = 1; x <= BoardGameConfig.getNbColonne(); x++) {
-			for (int y = 1; y <= BoardGameConfig.getNbLigne(); y++) {
-				if (p.isAlgoMoveOk(x, y, ActionType.MOVE)
-						|| p.isAlgoMoveOk(x, y, ActionType.TAKE)) {
-					coords.add(new Coord(x, y));
+		if (p != null) {
+			for (int y = 0; y < BoardGameConfig.getNbLigne(); y++) {
+				for (int x = 0; x < BoardGameConfig.getNbColonne(); x++) {
+					if ((p.isAlgoMoveOk(x, y, ActionType.MOVE) || p
+							.isAlgoMoveOk(x, y, ActionType.TAKE))
+							&& checkItineraryLegal(p, x, y)) {
+						coords.add(new Coord(x, y));
+					}
 				}
 			}
 		}
 		return coords;
+	}
+
+	private boolean checkItineraryLegal(Pieces p, int xFinal, int yFinal) {
+		if (!(p.isAlgoMoveOk(xFinal, yFinal, ActionType.MOVE) || p
+				.isAlgoMoveOk(xFinal, yFinal, ActionType.TAKE))) {
+			return false;
+		}
+		List<Coord> list = p.getMoveItinerary(xFinal, yFinal);
+
+		if (list.size() > 0) {
+			for (Coord c : list) {
+				if (this.chessImplementor.getPieceAtCoord(c.getX(), c.getY()) != null) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	@Override
@@ -72,12 +93,8 @@ public class ChessModel implements ChessGameModel {
 
 			// vérifie si on a une pièce sur le chemin. Si oui, le move est
 			// illégal.
-			List<Coord> list = p1.getMoveItinerary(xFinal, yFinal);
-
-			for (Coord c : list) {
-				if (this.chessImplementor.getPieceAtCoord(c.getX(), c.getY()) != null) {
-					return ActionType.ILLEGAL;
-				}
+			if (!this.checkItineraryLegal(p1, xFinal, yFinal)) {
+				return ActionType.ILLEGAL;
 			}
 
 			if (p2 != null) {
@@ -86,6 +103,8 @@ public class ChessModel implements ChessGameModel {
 					// suppression piece
 					p2.catchPiece();
 					p1.doMove(xFinal, yFinal);
+					this.colorCurrentPlayer = this.colorCurrentPlayer == Couleur.BLANC ? Couleur.NOIR
+							: Couleur.BLANC;
 					return ActionType.TAKE;
 				} else {
 					return ActionType.ILLEGAL;

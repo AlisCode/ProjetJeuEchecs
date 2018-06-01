@@ -36,8 +36,11 @@ public class MathHelper {
 			}
 			xTemp += xDeplacement;
 			yTemp += yDeplacement;
+
 			firstLoop = false;
 		}
+
+		coords.add(arrivee);
 
 		return coords;
 	}

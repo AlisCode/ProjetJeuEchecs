@@ -68,6 +68,8 @@ public class ChessGridGUIListener implements MouseListener, MouseMotionListener 
 			return;
 		}
 
+		this.chessGameControler.actionsWhenPieceIsSelectedOnGUI(coords, col);
+
 		Component c = this.chessGridGUI.findComponentAt(ev.getX(), ev.getY());
 
 		if (c instanceof JPanel)

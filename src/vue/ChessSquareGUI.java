@@ -9,6 +9,10 @@ import tools.data.Coord;
 
 public class ChessSquareGUI extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Coord coords;
 	private Color color;
 
@@ -24,10 +28,15 @@ public class ChessSquareGUI extends JPanel {
 	public Coord getCoords() {
 		return this.coords;
 	}
-	
-	public String toString(){
-		return "[x: " + this.coords.getX() + ",y: " + this.coords.getY() +", color:" + this.color +"]";
+
+	public String toString() {
+		return "[x: " + this.coords.getX() + ",y: " + this.coords.getY()
+				+ ", color:" + this.color + "]";
 	}
 
+	public void setLight(boolean light) {
+		this.setBackground(light ? Color.GREEN : this.color);
+		this.repaint();
+	}
 
 }

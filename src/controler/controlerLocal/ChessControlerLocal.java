@@ -1,5 +1,7 @@
 package controler.controlerLocal;
 
+import java.util.List;
+
 import javax.swing.JLayeredPane;
 
 import model.business.ChessGameModel;
@@ -21,18 +23,24 @@ public class ChessControlerLocal implements ChessGameControlerModelVue {
 	@Override
 	public void actionsWhenPieceIsSelectedOnGUI(Coord pieceToMoveCoord,
 			Couleur pieceToMoveCouleur) {
-		// TODO Auto-generated method stub
 
+		List<Coord> coords = this.chessGame.getPieceListMoveOK(
+				pieceToMoveCoord.getX(), pieceToMoveCoord.getY());
+		this.chessGridGUI.resetLight(coords, true);
 	}
 
 	@Override
 	public void actionsWhenPieceIsMovedOnGUI(Coord pieceToMoveCoord,
 			Coord targetCoord) {
-		// TODO Auto-generated method stub
+
+		List<Coord> coords = this.chessGame.getPieceListMoveOK(
+				pieceToMoveCoord.getX(), pieceToMoveCoord.getY());
 
 		ActionType at = this.chessGame
 				.move(pieceToMoveCoord.getX(), pieceToMoveCoord.getY(),
 						targetCoord.getX(), targetCoord.getY());
+
+		this.chessGridGUI.resetLight(coords, false);
 
 		if (at != ActionType.ILLEGAL) {
 			this.chessGridGUI.movePiece(targetCoord);

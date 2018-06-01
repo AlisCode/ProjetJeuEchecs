@@ -1,5 +1,6 @@
 package model.piece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tools.MathHelper;
@@ -23,20 +24,18 @@ public class Pion extends AbstractPiece {
 		int deltaY = this.getY() - yFinal;
 		boolean isMovingOnXAxis = Math.abs(deltaX) == 1;
 		int limitMove = this.hasFirstMoved ? 1 : 2;
+		int coeffMove = this.getCouleur() == Couleur.NOIR ? -1 : 1;
 		switch (action) {
 		case MOVE:
-			if (this.getCouleur() == Couleur.NOIR) {
-				return !isMovingOnXAxis && deltaY < 0 && deltaY >= -limitMove;
-			}
-			return !isMovingOnXAxis && deltaY > 0 && deltaY <= limitMove;
+			return deltaX == 0
+					&& MathHelper.isBetween(limitMove * coeffMove, 0, deltaY);
 		case TAKE:
-			if (this.getCouleur() == Couleur.NOIR) {
-				return isMovingOnXAxis && deltaY < 0 && deltaY >= -limitMove;
-			}
-			return isMovingOnXAxis && deltaY > 0 && deltaY <= limitMove;
+			return Math.abs(deltaX) == 1
+					&& MathHelper.isBetween(coeffMove, 0, deltaY);
 		default:
 			return false;
 		}
+
 	}
 
 	@Override
@@ -54,5 +53,30 @@ public class Pion extends AbstractPiece {
 		ActionType at = super.doMove(xFinal, yFinal);
 		this.hasFirstMoved = true;
 		return at;
+	}
+
+	// tests unitaires
+	public static void main(String[] args) {
+		Pion p = new Pion(Couleur.BLANC, new Coord(2, 1));
+
+		List<Boolean> tests = new ArrayList<>();
+
+		for (int y = 1; y <= 10; y++) {
+			for (int x = 1; x <= 10; x++) {
+				tests.add(p.isAlgoMoveOk(x, y, ActionType.MOVE)
+						|| p.isAlgoMoveOk(x, y, ActionType.TAKE));
+			}
+		}
+
+		int count = 0;
+		for (Boolean b : tests) {
+			if (b) {
+				count++;
+			}
+		}
+
+		System.out.println("count : " + count);
+
+		tests.clear();
 	}
 }
