@@ -5,6 +5,7 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+import tools.BoardGameConfig;
 import tools.data.Coord;
 
 public class ChessSquareGUI extends JPanel {
@@ -18,11 +19,15 @@ public class ChessSquareGUI extends JPanel {
 
 	public ChessSquareGUI(Coord coords) {
 		this.coords = coords;
-		this.color = (coords.getX() + coords.getY()) % 2 == 1 ? Color.BLACK
-				: Color.WHITE;
+		this.color = (coords.getX() + coords.getY()) % 2 == 1 ? BoardGameConfig
+				.getBlackSquareColor() : BoardGameConfig.getWhiteSquareColor();
 
 		this.setBackground(this.color);
 		this.setLayout(new BorderLayout());
+	}
+
+	private boolean isImpair() {
+		return (coords.getX() + coords.getY()) % 2 == 0;
 	}
 
 	public Coord getCoords() {
@@ -35,7 +40,8 @@ public class ChessSquareGUI extends JPanel {
 	}
 
 	public void setLight(boolean light) {
-		this.setBackground(light ? Color.GREEN : this.color);
+		this.setBackground(light ? isImpair() ? Color.LIGHT_GRAY
+				: Color.DARK_GRAY : this.color);
 		this.repaint();
 	}
 

@@ -6,7 +6,6 @@ import java.util.List;
 import model.ChessImplementor;
 import model.piece.Pieces;
 import tools.BoardGameConfig;
-import tools.MathHelper;
 import tools.data.ActionType;
 import tools.data.Coord;
 import tools.data.Couleur;
