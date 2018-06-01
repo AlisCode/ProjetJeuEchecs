@@ -57,21 +57,22 @@ public class ChessModel implements ChessGameModel {
 	}
 
 	private boolean checkItineraryLegal(Pieces p, int xFinal, int yFinal) {
-		if (!(p.isAlgoMoveOk(xFinal, yFinal, ActionType.MOVE) || p
-				.isAlgoMoveOk(xFinal, yFinal, ActionType.TAKE))) {
-			return false;
-		}
-		List<Coord> list = p.getMoveItinerary(xFinal, yFinal);
 
-		if (list.size() > 0) {
-			for (Coord c : list) {
-				if (this.chessImplementor.getPieceAtCoord(c.getX(), c.getY()) != null) {
-					return false;
-				}
+		List<Coord> list = p.getMoveItinerary(xFinal, yFinal);
+		Pieces pFinal = this.chessImplementor.getPieceAtCoord(xFinal, yFinal);
+
+		for (Coord c : list) {
+			if (this.chessImplementor.getPieceAtCoord(c.getX(), c.getY()) != null) {
+				return false;
 			}
 		}
 
-		return true;
+		if (pFinal != null) {
+			return p.isAlgoMoveOk(xFinal, yFinal, ActionType.TAKE)
+					&& pFinal.getCouleur() != p.getCouleur();
+		} else {
+			return p.isAlgoMoveOk(xFinal, yFinal, ActionType.MOVE);
+		}
 	}
 
 	@Override

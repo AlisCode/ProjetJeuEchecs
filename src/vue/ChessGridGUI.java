@@ -156,13 +156,11 @@ public class ChessGridGUI extends JLayeredPane implements ChessGameGUI {
 	@Override
 	public void resetLight(List<Coord> coords, boolean isLight) {
 
-		System.out.println("resetting lights: " + isLight);
 		for (Coord c : coords) {
 			ChessSquareGUI csg = this.map.get(c);
 			if (csg != null) {
 				csg.setLight(isLight);
 			}
-
 		}
 	}
 

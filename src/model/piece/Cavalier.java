@@ -23,10 +23,7 @@ public class Cavalier extends AbstractPiece {
 
 	@Override
 	public List<Coord> getMoveItinerary(int xFinal, int yFinal) {
-		// TODO Auto-generated method stub
-		List<Coord> coords = new ArrayList<Coord>();
-		coords.add(new Coord(xFinal, yFinal));
-		return coords ;
+		return new ArrayList<Coord>();
 	}
 
 }

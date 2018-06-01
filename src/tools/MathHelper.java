@@ -39,9 +39,6 @@ public class MathHelper {
 
 			firstLoop = false;
 		}
-
-		coords.add(arrivee);
-
 		return coords;
 	}
 
